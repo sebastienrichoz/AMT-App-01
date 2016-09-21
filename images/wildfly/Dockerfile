@@ -3,7 +3,7 @@ FROM jboss/wildfly:10.1.0.Final
 MAINTAINER Damien Rochat <damien.rochat@heig-vd.ch>
 MAINTAINER Sébastien Richoz <sebastien.richoz1@heig-vd.ch>
 
-ADD ../../dist/helloworld.war /opt/jboss/wildfly/standalone/deployments/
+ADD app1-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
