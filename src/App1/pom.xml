@@ -10,14 +10,18 @@
 
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.3</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <warName>App1</warName>
+          <outputDirectory>../../images/wildfly/</outputDirectory>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 </project>
