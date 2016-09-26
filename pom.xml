@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ch.heigvd.amt</groupId>
-  <artifactId>App1</artifactId>
+  <artifactId>app01</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>App1</name>
+  <name>AMT-App-01</name>
 
   <build>
     <plugins>
@@ -17,8 +17,8 @@
         <version>2.3</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <warName>App1</warName>
-          <outputDirectory>../../images/wildfly/</outputDirectory>
+          <warName>AMT-App-01</warName>
+          <outputDirectory>./images/wildfly/</outputDirectory>
         </configuration>
       </plugin>
 
