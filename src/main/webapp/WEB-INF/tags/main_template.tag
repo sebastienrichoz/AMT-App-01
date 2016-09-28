@@ -19,9 +19,9 @@
             </div>
             <div class="top-bar-right">
                 <ul class="menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
                 </ul>
             </div>
         </div>

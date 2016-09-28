@@ -1,6 +1,7 @@
 package ch.heigvd.amt.app01.web;
 
 import ch.heigvd.amt.app01.model.User;
+import ch.heigvd.amt.app01.service.ServiceManager;
 import ch.heigvd.amt.app01.service.UserManager;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import javax.servlet.ServletException;
 
 public class RegisterServlet extends HttpServlet {
 
-    private UserManager userManager = UserManager.getInstance();
+    private ServiceManager serviceManager = ServiceManager.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserManager userManager = serviceManager.getUserManager();
 
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
@@ -28,13 +30,13 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if (username.equals("") || password.equals("")) {
-            request.setAttribute("errorMessage", "Veuillez renseigner au minimum un nom d'utilisateur et un mot de passe");
+            request.setAttribute("errorMessage", "Provide at least an username and a password");
             request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }
 
-        if (userManager.getUserByUsername(username) != null) {
-            request.setAttribute("errorMessage", "Ce nom d'utilisateur est déjà utilisé");
+        if (userManager.findByUsername(username) != null) {
+            request.setAttribute("errorMessage", "This username is not available");
             request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             return;
         }
@@ -45,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(password);
-        userManager.addUser(user);
+        userManager.saveUser(user);
         response.sendRedirect("login");
     }
 }

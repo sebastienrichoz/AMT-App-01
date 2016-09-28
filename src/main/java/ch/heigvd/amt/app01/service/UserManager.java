@@ -2,48 +2,31 @@ package ch.heigvd.amt.app01.service;
 
 import ch.heigvd.amt.app01.model.User;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
 
-    private static UserManager instance;
-    private List<User> users = new LinkedList<User>();
+    private Map<String, User> users = new HashMap<String, User>();
 
-    private UserManager() {}
-
-    public static UserManager getInstance() {
-        if (instance == null) {
-            instance = new UserManager();
+    public void saveUser(User user) {
+        if (users.get(user.getUsername()) != null) {
+            throw new RuntimeException("This username already exists");
         }
-        return instance;
+        users.put(user.getUsername(), user);
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public User findByUsername(String username) {
+        return users.get(username);
     }
 
-    public User getUserByUsername(String username) {
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
+    public User findByUsernameAndPassword(String username, String password) {
+        User user = users.get(username);
+        if (user != null) {
+           if (user.getPassword().equals(password)) {
+               return user;
+           }
         }
         return null;
-    }
-
-    public boolean authentificate(String username, String password) {
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                // TODO: 27.09.16 créer une session
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isAuthentificated() {
-        // TODO: 27.09.16 checker si une session existe et si elle est valide
-        return false;
     }
 }
