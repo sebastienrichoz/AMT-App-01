@@ -32,4 +32,12 @@ public class AuthManager {
         HttpSession session = request.getSession();
         session.removeAttribute("authUsername");
     }
+
+    public User getUser(HttpServletRequest request) {
+        if (!isAuthentificated(request)) {
+            throw new RuntimeException("No logged user");
+        }
+        HttpSession session = request.getSession();
+        return manager.findByUsername((String) session.getAttribute("authUsername"));
+    }
 }

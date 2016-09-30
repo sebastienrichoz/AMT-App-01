@@ -10,9 +10,9 @@
     <div class="row">
         <div class="large-4 large-offset-4 columns">
             <h3>Connexion</h3>
-            <c:if test="${not empty errorMessage}">
+            <c:if test="${not empty requestScope.errorMessage}">
                 <div class="alert callout">
-                    <p>${errorMessage}</p>
+                    <p>${requestScope.errorMessage}</p>
                 </div>
             </c:if>
             <p><a href="${pageContext.request.contextPath}/register">Création d'un nouveau compte</a></p>
