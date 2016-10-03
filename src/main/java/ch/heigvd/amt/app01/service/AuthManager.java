@@ -2,19 +2,19 @@ package ch.heigvd.amt.app01.service;
 
 import ch.heigvd.amt.app01.model.User;
 
+import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class AuthManager {
+@Singleton
+public class AuthManager implements AuthManagerLocal {
 
-    private UserManager manager;
-
-    public AuthManager(UserManager manager) {
-        this.manager = manager;
-    }
+    @EJB
+    private UserManagerLocal userManager;
 
     public boolean authentificate(HttpServletRequest request, String username, String password) {
-        User user = manager.findByUsernameAndPassword(username, password);
+        User user = userManager.findByUsernameAndPassword(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("authUsername", user.getUsername());
@@ -25,7 +25,7 @@ public class AuthManager {
 
     public boolean isAuthentificated(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return manager.findByUsername((String) session.getAttribute("authUsername")) != null;
+        return userManager.findByUsername((String) session.getAttribute("authUsername")) != null;
     }
 
     public void logout(HttpServletRequest request) {
@@ -38,6 +38,6 @@ public class AuthManager {
             throw new RuntimeException("No logged user");
         }
         HttpSession session = request.getSession();
-        return manager.findByUsername((String) session.getAttribute("authUsername"));
+        return userManager.findByUsername((String) session.getAttribute("authUsername"));
     }
 }

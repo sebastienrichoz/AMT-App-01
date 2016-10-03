@@ -8,7 +8,7 @@
 <jsp:attribute name="content">
 
     <div class="row">
-        <div class="large-4 large-offset-4 columns">
+        <div class="large-12 columns">
             <h3>Page d'accueil</h3>
         </div>
     </div>

@@ -2,10 +2,12 @@ package ch.heigvd.amt.app01.service;
 
 import ch.heigvd.amt.app01.model.User;
 
+import javax.ejb.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserManager {
+@Singleton
+public class UserManager implements UserManagerLocal {
 
     private Map<String, User> users = new HashMap<String, User>();
 

@@ -1,6 +1,3 @@
-<%@tag import="ch.heigvd.amt.app01.service.AuthManager" %>
-<%@tag import="ch.heigvd.amt.app01.service.ServiceManager" %>
-
 <%@tag description="Main template" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,7 +16,7 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="menu">
-                    <li class="menu-text">COURS'GET TEAM</li>
+                    <li class="menu-text">Les cours'get</li>
                 </ul>
             </div>
             <div class="top-bar-right">
