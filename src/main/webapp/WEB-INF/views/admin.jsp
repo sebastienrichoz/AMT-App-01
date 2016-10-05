@@ -10,6 +10,12 @@
     <div class="row">
         <div class="large-12 columns">
             <h3>Administration</h3>
+            <h5>Registered users</h5>
+            <ul>
+                <c:forEach items="${requestScope.users}" var="user">
+                    <li>${user.getUsername()}</li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
 

@@ -13,11 +13,13 @@ public class AuthManager implements AuthManagerLocal {
     @EJB
     private UserManagerLocal userManager;
 
+    private static final String SESSION_ATTR_USERNAME = "authUsername";
+
     public boolean authentificate(HttpServletRequest request, String username, String password) {
         User user = userManager.findByUsernameAndPassword(username, password);
         if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("authUsername", user.getUsername());
+            session.setAttribute(SESSION_ATTR_USERNAME, user.getUsername());
             return true;
         }
         return false;
@@ -25,12 +27,12 @@ public class AuthManager implements AuthManagerLocal {
 
     public boolean isAuthentificated(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return userManager.findByUsername((String) session.getAttribute("authUsername")) != null;
+        return userManager.findByUsername((String) session.getAttribute(SESSION_ATTR_USERNAME)) != null;
     }
 
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.removeAttribute("authUsername");
+        session.removeAttribute(SESSION_ATTR_USERNAME);
     }
 
     public User getUser(HttpServletRequest request) {
@@ -38,6 +40,6 @@ public class AuthManager implements AuthManagerLocal {
             throw new RuntimeException("No logged user");
         }
         HttpSession session = request.getSession();
-        return userManager.findByUsername((String) session.getAttribute("authUsername"));
+        return userManager.findByUsername((String) session.getAttribute(SESSION_ATTR_USERNAME));
     }
 }

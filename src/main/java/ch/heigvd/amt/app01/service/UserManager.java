@@ -3,6 +3,7 @@ package ch.heigvd.amt.app01.service;
 import ch.heigvd.amt.app01.model.User;
 
 import javax.ejb.Singleton;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,10 @@ public class UserManager implements UserManagerLocal {
             throw new RuntimeException("This username already exists");
         }
         users.put(user.getUsername(), user);
+    }
+
+    public ArrayList<User> findAll() {
+        return new ArrayList<User>(users.values());
     }
 
     public User findByUsername(String username) {
