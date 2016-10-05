@@ -16,7 +16,7 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="menu">
-                    <li class="menu-text">Les cours'get</li>
+                    <li class="menu-text">Les Courgettes</li>
                 </ul>
             </div>
             <div class="top-bar-right">
