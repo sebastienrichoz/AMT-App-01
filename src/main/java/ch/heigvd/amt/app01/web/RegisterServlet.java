@@ -1,18 +1,22 @@
 package ch.heigvd.amt.app01.web;
 
 import ch.heigvd.amt.app01.model.User;
-import ch.heigvd.amt.app01.service.ServiceManager;
+import ch.heigvd.amt.app01.service.ServiceManagerLocal;
 import ch.heigvd.amt.app01.service.UserManager;
 
 import java.io.IOException;
+import javax.ejb.EJB;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
 
-    private ServiceManager serviceManager = ServiceManager.getInstance();
+    @EJB
+    ServiceManagerLocal serviceManager;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

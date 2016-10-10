@@ -2,31 +2,54 @@ package ch.heigvd.amt.app01.service;
 
 import ch.heigvd.amt.app01.model.User;
 
+import javax.ejb.Stateless;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class UserManager {
+@Stateless
+public class UserManager implements UserManagerLocal {
 
-    private Map<String, User> users = new HashMap<String, User>();
+    private Map<Integer, User> users = new HashMap<Integer, User>();
+    private int id = 0;
 
     public void saveUser(User user) {
-        if (users.get(user.getUsername()) != null) {
+        if (users.get(user.getId()) != null) {
             throw new RuntimeException("This username already exists");
         }
-        users.put(user.getUsername(), user);
+        user.setId(id++);
+        users.put(user.getId(), user);
     }
 
+    public User findById(int id) {
+        return users.get(id);
+    }
+
+    @Override
     public User findByUsername(String username) {
-        return users.get(username);
+        return users.entrySet().stream()
+                .filter(u -> username.equals(u.getValue().getUsername()))
+                .map(map -> map.getValue())
+                .findFirst()
+                .get();
     }
 
     public User findByUsernameAndPassword(String username, String password) {
-        User user = users.get(username);
-        if (user != null) {
-           if (user.getPassword().equals(password)) {
-               return user;
-           }
-        }
-        return null;
+        return users.entrySet().stream()
+                .filter(u -> username.equals(u.getValue().getUsername()) && username.equals(u.getValue().getPassword()))
+                .map(map -> map.getValue())
+                .findFirst()
+                .get();
+    }
+
+    @Override
+    public void deleteById(int id) {
+        users.remove(id);
+    }
+
+    @Override
+    public Map<Integer, User> getUsers() {
+        return new HashMap<Integer, User>(users);
     }
 }

@@ -1,9 +1,10 @@
 package ch.heigvd.amt.app01.service;
 
-// TODO: 28.09.16 en attendant de voir quelque chose pour l'injection de dépendances
-public class ServiceManager {
+import javax.ejb.Singleton;
 
-    private static ServiceManager instance;
+// TODO: 28.09.16 en attendant de voir quelque chose pour l'injection de dépendances
+@Singleton
+public class ServiceManager implements ServiceManagerLocal {
 
     private UserManager userManager;
     private AuthManager authManager;
@@ -11,13 +12,6 @@ public class ServiceManager {
     private ServiceManager() {
         userManager = new UserManager();
         authManager = new AuthManager(userManager);
-    }
-
-    public static ServiceManager getInstance() {
-        if (instance == null) {
-            instance = new ServiceManager();
-        }
-        return instance;
     }
 
     public UserManager getUserManager() {

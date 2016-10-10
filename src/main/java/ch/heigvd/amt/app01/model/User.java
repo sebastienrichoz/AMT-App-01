@@ -2,11 +2,29 @@ package ch.heigvd.amt.app01.model;
 
 public class User {
 
+    private int id;
     private String firstname;
     private String lastname;
     private String email;
     private String username;
     private String password;
+
+    public User() {
+    }
+
+    public User(String firstname, String lastname, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -46,5 +64,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void update(User user) {
+        if (this != user) {
+            setFirstname(user.getFirstname());
+            setLastname(user.getLastname());
+            setEmail(user.getEmail());
+            setPassword(user.getPassword());
+            setUsername(user.getUsername());
+        }
     }
 }
