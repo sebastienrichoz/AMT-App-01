@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = "/admin")
+@WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @EJB
@@ -21,7 +21,14 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        if (!authManager.isAuthentificated(request)) {
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+        boolean authentificated = authManager.isAuthentificated(request);
+
+        if (authentificated && (path.equals("/login") || path.equals("/register"))) {
+            response.sendRedirect(request.getContextPath() + "/admin");
+            return;
+        }
+        else if (!authentificated && path.equals("/admin")) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
