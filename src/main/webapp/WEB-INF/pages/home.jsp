@@ -10,7 +10,7 @@
         <div class="row">
             <div class="large-12 columns">
                 <h3>Homepage</h3>
-                <p><a href="">Create an account</a> or <a href="">login</a></p>
+                <p><a href="${pageContext.request.contextPath}/register">Create an account</a> or <a href="${pageContext.request.contextPath}/login">login</a></p>
             </div>
         </div>
 

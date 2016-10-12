@@ -6,7 +6,7 @@
 <%@attribute name="content" fragment="true" %>
 
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js">
 <head>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/foundation.min.css" />
     <title>${title}</title>
