@@ -1,6 +1,6 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.service.AuthManagerLocal;
+import ch.heigvd.amt.app01.services.AuthManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.*;

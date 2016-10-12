@@ -1,4 +1,4 @@
-package ch.heigvd.amt.app01.model;
+package ch.heigvd.amt.app01.models;
 
 public class User {
 

@@ -1,7 +1,7 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.model.User;
-import ch.heigvd.amt.app01.service.UserManagerLocal;
+import ch.heigvd.amt.app01.models.User;
+import ch.heigvd.amt.app01.services.UserManagerLocal;
 
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -19,7 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
 
         if (userManager.findByUsername(username) != null) {
             request.setAttribute("errorMessage", "This username is not available");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;
         }
 
@@ -49,6 +49,6 @@ public class RegisterServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
         userManager.saveUser(user);
-        response.sendRedirect("login");
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 }
