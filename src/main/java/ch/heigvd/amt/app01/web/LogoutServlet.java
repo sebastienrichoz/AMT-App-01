@@ -1,6 +1,6 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.service.AuthManagerLocal;
+import ch.heigvd.amt.app01.services.AuthManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -19,6 +19,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         authManager.logout(request);
-        response.sendRedirect("home");
+        response.sendRedirect(request.getContextPath() + "/home");
     }
 }

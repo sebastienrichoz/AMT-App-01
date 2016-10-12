@@ -1,6 +1,6 @@
-package ch.heigvd.amt.app01.service;
+package ch.heigvd.amt.app01.services;
 
-import ch.heigvd.amt.app01.model.User;
+import ch.heigvd.amt.app01.models.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -37,7 +37,7 @@ public class AuthManager implements AuthManagerLocal {
 
     public User getUser(HttpServletRequest request) {
         if (!isAuthentificated(request)) {
-            throw new RuntimeException("No logged user");
+            throw new RuntimeException("No logged user"); // TODO: 12.10.16
         }
         HttpSession session = request.getSession();
         return userManager.findByUsername((String) session.getAttribute(SESSION_ATTR_USERNAME));

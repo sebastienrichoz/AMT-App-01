@@ -1,7 +1,7 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.model.User;
-import ch.heigvd.amt.app01.service.UserManagerLocal;
+import ch.heigvd.amt.app01.models.User;
+import ch.heigvd.amt.app01.services.UserManagerLocal;
 
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -19,7 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
     }
 
     @Override
@@ -29,26 +29,30 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String passwordCtrl = request.getParameter("passwordCtrl");
 
-        if (username.equals("") || password.equals("")) {
+        // TODO: 12.10.16 VerificationService ?
+
+        if (username.isEmpty() || password.isEmpty()) {
             request.setAttribute("errorMessage", "Provide at least an username and a password");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+            return;
+        }
+
+        if (!password.equals(passwordCtrl)) {
+            request.setAttribute("errorMessage", "The two passwords must be identical");
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;
         }
 
         if (userManager.findByUsername(username) != null) {
             request.setAttribute("errorMessage", "This username is not available");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;
         }
 
-        User user = new User();
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setEmail(email);
-        user.setUsername(username);
-        user.setPassword(password);
-        userManager.saveUser(user);
-        response.sendRedirect("login");
+        User user = new User(firstname, lastname, email, username, password);
+        userManager.save(user);
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 }

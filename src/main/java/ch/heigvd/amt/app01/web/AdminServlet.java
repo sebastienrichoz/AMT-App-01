@@ -1,6 +1,6 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.service.UserManagerLocal;
+import ch.heigvd.amt.app01.services.UserManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -19,6 +19,6 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("users", userManager.findAll());
-        request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/admin.jsp").forward(request, response);
     }
 }

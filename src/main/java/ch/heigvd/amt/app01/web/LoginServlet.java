@@ -1,6 +1,6 @@
 package ch.heigvd.amt.app01.web;
 
-import ch.heigvd.amt.app01.service.AuthManagerLocal;
+import ch.heigvd.amt.app01.services.AuthManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
     }
 
     @Override
@@ -28,10 +28,10 @@ public class LoginServlet extends HttpServlet {
 
         if (!authManager.authentificate(request, username, password)) {
             request.setAttribute("errorMessage", "Username or password incorrect");
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
             return;
         }
 
-        response.sendRedirect("admin");
+        response.sendRedirect(request.getContextPath() + "/admin");
     }
 }
