@@ -29,10 +29,19 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String passwordCtrl = request.getParameter("passwordCtrl");
 
-        if (username.equals("") || password.equals("")) {
+        // TODO: 12.10.16 VerificationService ?
+
+        if (username.isEmpty() || password.isEmpty()) {
             request.setAttribute("errorMessage", "Provide at least an username and a password");
-            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+            return;
+        }
+
+        if (!password.equals(passwordCtrl)) {
+            request.setAttribute("errorMessage", "The two passwords must be identical");
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;
         }
 

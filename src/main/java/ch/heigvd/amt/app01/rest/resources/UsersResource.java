@@ -53,16 +53,22 @@ public class UsersResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postUser(UserCreationDTO userDTO) {
-        User user = userDAO(userDTO);
 
-        // TODO: 12.10.16 422 validation
-        /*if (findByEmail(user.getEmail()) != null) {
-            throw new ValidationException("This email is already registered");
+        // TODO: 12.10.16 VerificationService ?
+
+        if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
+            return Response.status(422).entity(new ErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
         }
-        if (findByUsername(user.getUsername()) != null) {
-            throw new ValidationException("This username is already registered");
-        }*/
 
+        if (!userDTO.getPassword().equals(userDTO.getPasswordCtrl())) {
+            return Response.status(422).entity(new ErrorDTO("The two passwords must be identical")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+        }
+
+        if (userManager.findByUsername(userDTO.getUsername()) != null) {
+            return Response.status(422).entity(new ErrorDTO("This username is not available")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+        }
+
+        User user = userDAO(userDTO);
         userManager.save(user);
 
         URI href = uriInfo
@@ -83,19 +89,25 @@ public class UsersResource {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
         }
 
+        // TODO: 12.10.16 VerificationService ?
+
+        if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
+            return Response.status(422).entity(new ErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+        }
+
+        if (!userDTO.getPassword().equals(userDTO.getPasswordCtrl())) {
+            return Response.status(422).entity(new ErrorDTO("The two passwords must be identical")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+        }
+
+        if (userManager.findByUsername(userDTO.getUsername()) != null) {
+            return Response.status(422).entity(new ErrorDTO("This username is not available")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+        }
+
         user.setFirstname(userDTO.getFirstname());
         user.setLastname(userDTO.getLastname());
         user.setEmail(userDTO.getEmail());
         user.setUsername(userDTO.getUsername());
-
-        // TODO: 12.10.16 422 validation
-        /*if (findByEmail(user.getEmail()) != null) {
-            throw new ValidationException("This email is already registered");
-        }
-        if (findByUsername(user.getUsername()) != null) {
-            throw new ValidationException("This username is already registered");
-        }*/
-
+        user.setPassword(userDTO.getPassword());
         userManager.save(user);
 
         return Response.ok(userPresentationDTO(user)).build(); // HTTP 200 OK

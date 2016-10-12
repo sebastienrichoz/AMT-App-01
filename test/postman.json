@@ -46,7 +46,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstname\" : \"a\",\n\t\"lastname\" : \"a\",\n\t\"email\" : \"a@papa.com\",\n\t\"username\" : \"a\",\n\t\"password\" : \"a\"\n}"
+					"raw": "{\n\t\"firstname\" : \"a\",\n\t\"lastname\" : \"a\",\n\t\"email\" : \"a@papa.com\",\n\t\"username\" : \"a\",\n\t\"password\" : \"a\",\n\t\"passwordCtrl\" : \"a\"\n}"
 				},
 				"description": ""
 			},
@@ -71,7 +71,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstname\" : \"Damien\",\n\t\"lastname\" : \"Rochat\",\n\t\"email\" : \"damien@courgettes.com\",\n\t\"username\" : \"damdam\",\n\t\"password\" : \"roro\"\n}"
+					"raw": "{\n\t\"firstname\" : \"Damien\",\n\t\"lastname\" : \"Rochat\",\n\t\"email\" : \"damien@courgettes.com\",\n\t\"username\" : \"damdam\",\n\t\"password\" : \"roro\",\n\t\"passwordCtrl\" : \"roro\"\n}"
 				},
 				"description": ""
 			},

@@ -21,6 +21,7 @@
                     <input type="text" name="email" placeholder="Email" value="${pageContext.request.getParameter("email")}">
                     <input type="text" name="username" placeholder="Username" value="${pageContext.request.getParameter("username")}">
                     <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="passwordCtrl" placeholder="Password verification">
                     <input type="submit" class="expanded button" value="Register">
                 </form>
                 <p><a href="${pageContext.request.contextPath}/login">Already have an account ?</a></p>
