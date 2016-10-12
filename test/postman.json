@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "AMT-App-01",
+		"_postman_id": "0d11cc00-34ed-e502-a5fe-528e568eed09",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/users",
+			"request": {
+				"url": "http://127.0.0.1:8080/AMT-App-01/api/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users",
+			"request": {
+				"url": "http://127.0.0.1:8080/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"a\",\n\t\"lastname\" : \"a\",\n\t\"email\" : \"a@papa.com\",\n\t\"username\" : \"a\",\n\t\"password\" : \"a\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/1",
+			"request": {
+				"url": "http://127.0.0.1:8080/AMT-App-01/api/users/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Damien\",\n\t\"lastname\" : \"Rochat\",\n\t\"email\" : \"damien@courgettes.com\",\n\t\"username\" : \"damdam\",\n\t\"password\" : \"roro\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/1",
+			"request": {
+				"url": "http://127.0.0.1:8080/AMT-App-01/api/users/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -42,13 +42,8 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        User user = new User();
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setEmail(email);
-        user.setUsername(username);
-        user.setPassword(password);
-        userManager.saveUser(user);
+        User user = new User(firstname, lastname, email, username, password);
+        userManager.save(user);
         response.sendRedirect(request.getContextPath() + "/login");
     }
 }

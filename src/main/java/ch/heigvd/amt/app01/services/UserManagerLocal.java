@@ -3,14 +3,20 @@ package ch.heigvd.amt.app01.services;
 import ch.heigvd.amt.app01.models.User;
 
 import javax.ejb.Local;
-import java.util.ArrayList;
+import java.util.List;
 
 @Local
 public interface UserManagerLocal {
 
-    void saveUser(User user);
+    void save(User user);
 
-    ArrayList<User> findAll();
+    void delete(User user);
+
+    List<User> findAll();
+
+    User findById(int id);
+
+    User findByEmail(String email);
 
     User findByUsername(String username);
 

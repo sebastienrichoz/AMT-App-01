@@ -13,7 +13,7 @@
                 <h5>Registered users</h5>
                 <ul>
                     <c:forEach items="${requestScope.users}" var="user">
-                        <li>${user.getUsername()}</li>
+                        <li><strong>#${user.getId()}</strong> ${user.getUsername()}</li>
                     </c:forEach>
                 </ul>
             </div>

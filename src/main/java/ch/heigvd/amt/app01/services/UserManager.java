@@ -3,37 +3,62 @@ package ch.heigvd.amt.app01.services;
 import ch.heigvd.amt.app01.models.User;
 
 import javax.ejb.Singleton;
+import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 @Singleton
 public class UserManager implements UserManagerLocal {
 
-    private Map<String, User> users = new HashMap<String, User>();
+    // TODO: 12.10.16 passer par un autre service
+    private Map<Integer, User> users = new HashMap<>();
+    private int id = 0;
 
-    public void saveUser(User user) {
-        if (users.get(user.getUsername()) != null) {
-            throw new RuntimeException("This username already exists");
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            user.setId(++id);
         }
-        users.put(user.getUsername(), user);
+        users.put(id, user);
     }
 
-    public ArrayList<User> findAll() {
-        return new ArrayList<User>(users.values());
+    @Override
+    public void delete(User user) {
+        users.remove(user.getId());
     }
 
+    @Override
+    public List<User> findAll() {
+        return new ArrayList<>(users.values());
+    }
+
+    @Override
+    public User findById(int id) {
+        return users.get(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return users.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public User findByUsername(String username) {
-        return users.get(username);
+        return users.values().stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
     }
 
+    @Override
     public User findByUsernameAndPassword(String username, String password) {
-        User user = users.get(username);
-        if (user != null) {
-           if (user.getPassword().equals(password)) {
-               return user;
-           }
-        }
-        return null;
+        return users.values().stream()
+                .filter(user -> user.getUsername().equals(username) && user.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -23,7 +23,9 @@ public class AuthFilter implements Filter {
 
         if (!authManager.isAuthentificated(request)) {
             response.sendRedirect(request.getContextPath() + "/login");
+            return;
         }
+
         chain.doFilter(req, resp);
     }
 

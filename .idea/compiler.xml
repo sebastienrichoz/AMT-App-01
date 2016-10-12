@@ -26,7 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AMT-App-01" target="1.5" />
+      <module name="AMT-App-01" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
