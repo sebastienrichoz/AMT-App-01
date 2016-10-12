@@ -45,7 +45,7 @@
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
           <warName>AMT-App-01</warName>
-          <outputDirectory>./images/wildfly/</outputDirectory>
+          <outputDirectory>./images/wildfly/data/</outputDirectory>
         </configuration>
       </plugin>
     </plugins>

@@ -40,7 +40,6 @@ public class UsersResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("id") int id) {
-        System.out.println("=====> " + id);
         User user = userManager.findById(id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
