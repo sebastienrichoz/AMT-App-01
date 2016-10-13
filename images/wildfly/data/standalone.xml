@@ -148,8 +148,8 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jta="true" jndi-name="java:/jdbc/SakilaDS" pool-name="SakilaDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://db:3306/sakila</connection-url>
+                <datasource jta="true" jndi-name="java:/jdbc/AMTApp01DS" pool-name="AMTApp01DS" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:mysql://db:3306/amt_app_01</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                     <driver>mysql-connector-java-5.1.40-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
                     <security>

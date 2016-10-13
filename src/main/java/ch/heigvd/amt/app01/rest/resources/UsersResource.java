@@ -15,6 +15,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: 13.10.16 Faire plus de tests sur Postman
+
 @Stateless
 @Path("/users")
 public class UsersResource {

@@ -16,8 +16,6 @@ public interface UserManagerLocal {
 
     User findById(int id);
 
-    User findByEmail(String email);
-
     User findByUsername(String username);
 
     User findByUsernameAndPassword(String username, String password);
