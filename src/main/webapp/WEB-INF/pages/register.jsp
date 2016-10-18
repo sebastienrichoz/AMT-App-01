@@ -3,7 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:main_template title="Registration page">
+<t:template title="Registration page">
 
     <jsp:attribute name="content">
 
@@ -30,4 +30,4 @@
 
     </jsp:attribute>
 
-</t:main_template>
+</t:template>

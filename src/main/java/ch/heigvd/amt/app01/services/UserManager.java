@@ -4,6 +4,7 @@ import ch.heigvd.amt.app01.models.User;
 
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 // TODO: 13.10.16 Factoriser tout ça un minimum
 
-@Singleton
+@Stateless
 public class UserManager implements UserManagerLocal {
 
     @Resource(lookup = "java:/jdbc/AMTApp01DS")

@@ -22,13 +22,14 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        boolean authentificated = authManager.isAuthentificated(request);
+        boolean isAuthentificated = authManager.isAuthentificated(request);
+        request.setAttribute("isAuthentificated", isAuthentificated);
 
-        if (authentificated && (path.equals("/login") || path.equals("/register"))) {
+        if (isAuthentificated && (path.equals("/login") || path.equals("/register"))) {
             response.sendRedirect(request.getContextPath() + "/admin");
             return;
         }
-        else if (!authentificated && path.equals("/admin")) {
+        else if (!isAuthentificated && path.equals("/admin")) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }

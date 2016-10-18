@@ -1,6 +1,7 @@
 package ch.heigvd.amt.app01.web;
 
 import ch.heigvd.amt.app01.models.User;
+import ch.heigvd.amt.app01.services.AuthManagerLocal;
 import ch.heigvd.amt.app01.services.UserManagerLocal;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class RegisterServlet extends HttpServlet {
 
     @EJB
     private UserManagerLocal userManager;
+
+    @EJB
+    private AuthManagerLocal authManager;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,6 +57,7 @@ public class RegisterServlet extends HttpServlet {
 
         User user = new User(firstname, lastname, email, username, password);
         userManager.save(user);
+        authManager.authentificate(request, username, password);
         response.sendRedirect(request.getContextPath() + "/login");
     }
 }

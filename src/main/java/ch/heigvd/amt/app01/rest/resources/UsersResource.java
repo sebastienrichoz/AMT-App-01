@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 public class UsersResource {
 
     @EJB
-    UserManagerLocal userManager;
+    private UserManagerLocal userManager;
 
     @Context
-    UriInfo uriInfo;
+    private UriInfo uriInfo;
 
     // TODO: 12.10.16 ajouter url dans les détails d'un utilisateur
     
@@ -58,15 +58,15 @@ public class UsersResource {
         // TODO: 12.10.16 VerificationService ?
 
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
-            return Response.status(422).entity(new ErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ApiErrorDTO("Provide at least an username and a password")).build(); // HTTP 400 BAD REQUEST
         }
 
         if (!userDTO.getPassword().equals(userDTO.getPasswordCtrl())) {
-            return Response.status(422).entity(new ErrorDTO("The two passwords must be identical")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ApiErrorDTO("The two passwords must be identical")).build(); // HTTP 400 BAD REQUEST
         }
 
         if (userManager.findByUsername(userDTO.getUsername()) != null) {
-            return Response.status(422).entity(new ErrorDTO("This username is not available")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ApiErrorDTO("This username is not available")).build(); // HTTP 400 BAD REQUEST
         }
 
         User user = userDAO(userDTO);
@@ -93,15 +93,15 @@ public class UsersResource {
         // TODO: 12.10.16 VerificationService ?
 
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
-            return Response.status(422).entity(new ErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(422).entity(new ApiErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
         }
 
         if (!userDTO.getPassword().equals(userDTO.getPasswordCtrl())) {
-            return Response.status(422).entity(new ErrorDTO("The two passwords must be identical")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(422).entity(new ApiErrorDTO("The two passwords must be identical")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
         }
 
         if (userManager.findByUsername(userDTO.getUsername()) != null) {
-            return Response.status(422).entity(new ErrorDTO("This username is not available")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
+            return Response.status(422).entity(new ApiErrorDTO("This username is not available")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)
         }
 
         user.setFirstname(userDTO.getFirstname());

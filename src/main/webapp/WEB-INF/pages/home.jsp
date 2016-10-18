@@ -3,7 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:main_template title="Homepage">
+<t:template title="Homepage">
 
     <jsp:attribute name="content">
 
@@ -16,4 +16,4 @@
 
     </jsp:attribute>
 
-</t:main_template>
+</t:template>

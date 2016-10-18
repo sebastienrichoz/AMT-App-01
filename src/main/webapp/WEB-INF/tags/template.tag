@@ -4,12 +4,15 @@
 
 <%@attribute name="title"%>
 <%@attribute name="content" fragment="true" %>
+<%@attribute name="styles" fragment="true" %>
+<%@attribute name="scripts" fragment="true" %>
 
 <!doctype html>
-<html class="no-js">
+<html>
 <head>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/foundation.min.css" />
     <title>${title}</title>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/foundation.min.css" />
+    <jsp:invoke fragment="styles"/>
 </head>
 <body>
     <header>
@@ -24,7 +27,7 @@
                     <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                     <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
                     <c:choose>
-                        <c:when test="${not empty sessionScope.authUsername}">
+                        <c:when test="${requestScope.isAuthentificated == true}">
                             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
                         </c:when>
                         <c:otherwise>
@@ -37,5 +40,6 @@
     </header>
     <br>
     <jsp:invoke fragment="content"/>
+    <jsp:invoke fragment="scripts"/>
 </body>
 </html>

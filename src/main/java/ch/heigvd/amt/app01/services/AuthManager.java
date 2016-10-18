@@ -4,10 +4,13 @@ import ch.heigvd.amt.app01.models.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@Singleton
+// TODO: 18.10.16 Etre indépendant de HttpServletRequest
+
+@Stateless
 public class AuthManager implements AuthManagerLocal {
 
     @EJB
