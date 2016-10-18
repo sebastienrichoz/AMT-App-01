@@ -2,16 +2,16 @@ package ch.heigvd.amt.app01.models;
 
 public class User {
 
-    private int id;
+    private long id; // TODO: 18.10.16 doit être un long pour matcher mysql unsigned int
     private String firstname;
     private String lastname;
-    private String email;
+    private String email; // TODO: 18.10.16 Unique
     private String username;
     private String password;
 
     public User() {}
 
-    public User(int id, String firstname, String lastname, String email, String username) {
+    public User(long id, String firstname, String lastname, String email, String username) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -27,11 +27,11 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

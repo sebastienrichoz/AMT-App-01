@@ -14,7 +14,7 @@ public interface UserManagerLocal {
 
     List<User> findAll();
 
-    User findById(int id);
+    User findById(long id);
 
     User findByUsername(String username);
 

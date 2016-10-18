@@ -46,7 +46,7 @@ public class UserManager implements UserManagerLocal {
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getUsername());
             statement.setString(5, user.getPassword());
-            statement.setInt(6, user.getId());
+            statement.setLong(6, user.getId());
             int r = statement.executeUpdate();
             // TODO: 13.10.16 checker affectedRows
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class UserManager implements UserManagerLocal {
     public void delete(User user) {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setInt(1, user.getId());
+            statement.setLong(1, user.getId());
             int r = statement.executeUpdate();
             // TODO: 13.10.16 checker affectedRows
         } catch (SQLException e) {
@@ -88,10 +88,10 @@ public class UserManager implements UserManagerLocal {
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(long id) {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT id, firstname, lastname, email, username FROM users WHERE id = ?");
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             ResultSet r = statement.executeQuery();
             if (r.next()) {
                 return new User(

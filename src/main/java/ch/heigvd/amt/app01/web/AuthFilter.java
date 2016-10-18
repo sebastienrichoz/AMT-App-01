@@ -8,9 +8,14 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
 public class AuthFilter implements Filter {
+
+    private static List<String> UNAUTHENTIFICATED_BLACKLIST = Arrays.asList("/admin");
+    private static List<String> AUTHENTIFICATED_BLACKLIST = Arrays.asList("/login", "/register");
 
     @EJB
     private AuthManagerLocal authManager;
@@ -25,12 +30,12 @@ public class AuthFilter implements Filter {
         boolean isAuthentificated = authManager.isAuthentificated(request);
         request.setAttribute("isAuthentificated", isAuthentificated);
 
-        if (isAuthentificated && (path.equals("/login") || path.equals("/register"))) {
-            response.sendRedirect(request.getContextPath() + "/admin");
+        if (!isAuthentificated && UNAUTHENTIFICATED_BLACKLIST.contains(path)) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        else if (!isAuthentificated && path.equals("/admin")) {
-            response.sendRedirect(request.getContextPath() + "/login");
+        else if (isAuthentificated && AUTHENTIFICATED_BLACKLIST.contains(path)) {
+            response.sendRedirect(request.getContextPath() + "/admin");
             return;
         }
 

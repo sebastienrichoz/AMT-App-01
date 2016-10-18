@@ -41,7 +41,7 @@ public class UsersResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("id") int id) {
+    public Response getUser(@PathParam("id") long id) {
         User user = userManager.findById(id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
@@ -93,7 +93,7 @@ public class UsersResource {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putUser(@PathParam("id") int id, UserCreationDTO userDTO) {
+    public Response putUser(@PathParam("id") long id, UserCreationDTO userDTO) {
         User user = userManager.findById(id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
@@ -126,7 +126,7 @@ public class UsersResource {
     @DELETE
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteUser(@PathParam("id") int id) {
+    public Response deleteUser(@PathParam("id") long id) {
         User user = userManager.findById(id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
