@@ -3,7 +3,6 @@ package ch.heigvd.amt.app01.services;
 import ch.heigvd.amt.app01.models.User;
 
 import javax.annotation.Resource;
-import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;

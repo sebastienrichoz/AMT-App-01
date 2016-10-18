@@ -49,7 +49,16 @@ public class UsersResource {
         return Response.ok(userPresentationDTO(user)).build(); // HTTP 200 OK
     }
 
-    // TODO: 12.10.16 /api/users/{username}
+    @GET
+    @Path("{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUser(@PathParam("username") String username) {
+        User user = userManager.findByUsername(username);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
+        }
+        return Response.ok(userPresentationDTO(user)).build(); // HTTP 200 OK
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
