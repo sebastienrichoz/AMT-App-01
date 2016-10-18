@@ -1,4 +1,6 @@
-# HEIG-VD AMT-App-01 (Bootcamp) - A simple demo application using JavaEE platform, Wildfly server, and docker-compose
+# HEIG-VD AMT-App-01 (Bootcamp)
+
+A simple demo application using JavaEE platform, Wildfly server, and docker-compose.
 
 Provide registration, login and admin pages to visualize registered users and a REST API to manage them.
 
