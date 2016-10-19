@@ -27,8 +27,9 @@ public class UsersResource {
     @Context
     private UriInfo uriInfo;
 
+    // TODO: 12.10.16 ajouter id dans les détails d'un utilisateur
     // TODO: 12.10.16 ajouter url dans les détails d'un utilisateur
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserPresentationDTO> getUsers() {

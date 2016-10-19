@@ -2,7 +2,7 @@ package ch.heigvd.amt.app01.models;
 
 public class User {
 
-    private long id; // TODO: 18.10.16 doit être un long pour matcher mysql unsigned int
+    private long id;
     private String firstname;
     private String lastname;
     private String email; // TODO: 18.10.16 Unique
