@@ -1,0 +1,576 @@
+{
+	"variables": [],
+	"info": {
+		"name": "AMT-App-01",
+		"_postman_id": "a55540d9-2cfd-3ffb-61ab-141794ea565f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/users (Empty username)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Anakin\",\n\t\"lastname\" : \"Skywalker\",\n\t\"email\" : \"anakin@force.com\",\n\t\"username\" : \"\",\n\t\"password\" : \"anakin\",\n\t\"passwordCtrl\" : \"anakin\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users (Empty password)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Anakin\",\n\t\"lastname\" : \"Skywalker\",\n\t\"email\" : \"anakin@force.com\",\n\t\"username\" : \"anakin\",\n\t\"password\" : \"\",\n\t\"passwordCtrl\" : \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users (No identical passwords)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Anakin\",\n\t\"lastname\" : \"Skywalker\",\n\t\"email\" : \"anakin@force.com\",\n\t\"username\" : \"anakin\",\n\t\"password\" : \"anakin\",\n\t\"passwordCtrl\" : \"anaki\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 201;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Anakin\",\n\t\"lastname\" : \"Skywalker\",\n\t\"email\" : \"anakin@force.com\",\n\t\"username\" : \"anakin\",\n\t\"password\" : \"anakin\",\n\t\"passwordCtrl\" : \"anakin\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users (Username already exists)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 409\"] = responseCode.code === 409;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Anakin\",\n\t\"lastname\" : \"Skywalker\",\n\t\"email\" : \"anakin@force.com\",\n\t\"username\" : \"anakin\",\n\t\"password\" : \"anakin\",\n\t\"passwordCtrl\" : \"anakin\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{username} (Not found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 404\"] = responseCode.code === 404;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/yoda",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{username}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"First name = Anakin\"] = jsonData.firstname === \"Anakin\";\ntests[\"Last name = Skywalker\"] = jsonData.lastname === \"Skywalker\";\ntests[\"Email = anakin@force.com\"] = jsonData.email === \"anakin@force.com\";\ntests[\"Username = anakin\"] = jsonData.username === \"anakin\";\n\npostman.setGlobalVariable(\"USER_ID\", jsonData.id);"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/anakin",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Not found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 404\"] = responseCode.code === 404;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/9876584",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"vador\",\n\t\"password\" : \"vador\",\n\t\"passwordCtrl\" : \"vador\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Empty username)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"\",\n\t\"password\" : \"vador\",\n\t\"passwordCtrl\" : \"vador\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Empty password)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"vador\",\n\t\"password\" : \"\",\n\t\"passwordCtrl\" : \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (No identical passwords)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 422\"] = responseCode.code === 422;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"vador\",\n\t\"password\" : \"vador\",\n\t\"passwordCtrl\" : \"vado\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"vador\",\n\t\"password\" : \"vador\",\n\t\"passwordCtrl\" : \"vador\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Username already exists)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 409\"] = responseCode.code === 409;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstname\" : \"Darth Vader\",\n\t\"lastname\" : \"\",\n\t\"email\" : \"vador@empire.com\",\n\t\"username\" : \"vador\",\n\t\"password\" : \"vador\",\n\t\"passwordCtrl\" : \"vador\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Not found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 404\"] = responseCode.code === 404;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/943828",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\n\ntests[\"First name = Darth Vader\"] = jsonData.firstname === \"Darth Vader\";\ntests[\"Last name = ''\"] = jsonData.lastname === \"\";\ntests[\"Email = vador@empire.com\"] = jsonData.email === \"vador@empire.com\";\ntests[\"Username = vador\"] = jsonData.username === \"vador\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id} (Not found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 404\"] = responseCode.code === 404;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/9834567",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 204\"] = responseCode.code === 204;\n\npostman.clearGlobalVariable(\"USER_ID\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{SERVER_URL}}/AMT-App-01/api/users/{{USER_ID}}",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

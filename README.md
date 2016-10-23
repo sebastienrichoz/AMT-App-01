@@ -24,12 +24,17 @@ Provide registration, login and admin pages to visualize registered users and a 
 After you've got launched the application with docker-compose, you can access :
 - PHPMyAdmin on the port `6060`
 - MySQL on the port `3306`
-- Wildfly administration `9990`
+- Wildfly administration on the port `9990`
 
 ## Rest API
 The API allowing users management is documented here. It provide endpoints to create, find, update and delete users. You can also find a Postman collection to test see the API in action.
 
 This API is not secured with an authentication.
+
+## Known bugs and improvements
+- Issue for special characters when retrieving json data with the rest api.
+- The postman tests script must be run on a fresh install of the app.
+- Only the endpoint to get a specific user can be used with the id and username. Other actions will come in the futur.
 
 ## Authors
 Damien Rochat & Sébastien Richoz (HEIG-VD 2016)

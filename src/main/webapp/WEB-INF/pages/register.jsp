@@ -25,21 +25,21 @@
                 <form class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/register" method="post">
 
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">Firstname <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">Firstname</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" id="firstname" name="firstname" value="${pageContext.request.getParameter("firstname")}" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">Lastname <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">Lastname</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" id="lastname" name="lastname" value="${pageContext.request.getParameter("lastname")}" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" id="email" name="email" value="${pageContext.request.getParameter("email")}" class="form-control col-md-7 col-xs-12">
                         </div>
