@@ -59,9 +59,9 @@ public class UsersResource {
      * @return the user for presentation or HTTP 404 code if the id doesn't exists.
      */
     @GET
-    @Path("{id}")
+    @Path("/{id: \\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("id") long id) {
+    public Response getUserById(@PathParam("id") long id) {
         User user = userManager.findById(id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
@@ -80,7 +80,7 @@ public class UsersResource {
     @GET
     @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("username") String username) {
+    public Response getUserByUsername(@PathParam("username") String username) {
         User user = userManager.findByUsername(username);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
@@ -124,7 +124,7 @@ public class UsersResource {
         URI href = uriInfo
                 .getBaseUriBuilder()
                 .path(UsersResource.class)
-                .path(UsersResource.class, "getUser")
+                .path(UsersResource.class, "getUserByUsername")
                 .build(user.getId());
         return Response.created(href).build(); // HTTP 201 CREATED
     }
