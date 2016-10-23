@@ -1,5 +1,7 @@
 package ch.heigvd.amt.app01.rest.dto;
 
+import java.net.URI;
+
 /**
  * Class representing an user form for the presentation of an existing user.
  * The objet is used to transmit the information to the visitor.
@@ -15,6 +17,7 @@ public class UserPresentationDTO {
     private String lastname;
     private String email;
     private String username;
+    private URI uri;
 
     /**
      * Empty default constructor
@@ -29,13 +32,15 @@ public class UserPresentationDTO {
      * @param lastname the user's last name
      * @param email the user's email
      * @param username the user's username
+     * @param uri the user's resource url
      */
-    public UserPresentationDTO(long id, String firstname, String lastname, String email, String username) {
+    public UserPresentationDTO(long id, String firstname, String lastname, String email, String username, URI uri) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.username = username;
+        this.uri = uri;
     }
 
     public long getId() {
@@ -56,5 +61,9 @@ public class UserPresentationDTO {
 
     public String getUsername() {
         return username;
+    }
+
+    public URI getUri() {
+        return uri;
     }
 }

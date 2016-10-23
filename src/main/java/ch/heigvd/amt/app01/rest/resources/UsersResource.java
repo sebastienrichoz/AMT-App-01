@@ -32,8 +32,6 @@ public class UsersResource {
     @Context
     private UriInfo uriInfo;
 
-    // TODO: 12.10.16 ajouter url dans les détails d'un utilisateur
-
     /**
      * GET /api/users/
      *
@@ -46,7 +44,7 @@ public class UsersResource {
     public List<UserPresentationDTO> getUsers() {
         List<User> users = userManager.findAll();
         return users.stream()
-                .map(UsersResource::toDTO)
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -121,12 +119,7 @@ public class UsersResource {
         userManager.save(user);
 
         // Generate URL for the user resource and create response
-        URI href = uriInfo
-                .getBaseUriBuilder()
-                .path(UsersResource.class)
-                .path(UsersResource.class, "getUserByUsername")
-                .build(user.getId());
-        return Response.created(href).build(); // HTTP 201 CREATED
+        return Response.created(getUri(user)).build(); // HTTP 201 CREATED
     }
 
     /**
@@ -208,8 +201,15 @@ public class UsersResource {
      * @param user the user entity to transform.
      * @return the presentation user DTO for serialization.
      */
-    private static UserPresentationDTO toDTO(User user) {
-        return new UserPresentationDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getUsername());
+    private UserPresentationDTO toDTO(User user) {
+        return new UserPresentationDTO(
+                user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getEmail(),
+                user.getUsername(),
+                getUri(user)
+        );
     }
 
     /**
@@ -218,7 +218,27 @@ public class UsersResource {
      * @param userDTO the user DTO to transform.
      * @return the user entity created.
      */
-    private static User toDAO(UserCreationDTO userDTO) {
-        return new User(userDTO.getFirstname(), userDTO.getLastname(), userDTO.getEmail(), userDTO.getUsername(), userDTO.getPassword());
+    private User toDAO(UserCreationDTO userDTO) {
+        return new User(
+                userDTO.getFirstname(),
+                userDTO.getLastname(),
+                userDTO.getEmail(),
+                userDTO.getUsername(),
+                userDTO.getPassword()
+        );
+    }
+
+    /**
+     * Utility method that provide the URI of an user by his username.
+     *
+     * @param user the user.
+     * @return the URI for the user.
+     */
+    private URI getUri(User user) {
+        return uriInfo
+                .getBaseUriBuilder()
+                .path(UsersResource.class)
+                .path(UsersResource.class, "getUserByUsername")
+                .build(user.getUsername());
     }
 }
