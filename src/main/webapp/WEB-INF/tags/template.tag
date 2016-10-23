@@ -54,7 +54,7 @@
                         <div class="menu_section">
                             <ul class="nav child_menu">
                                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                                <c:if test="${requestScope.isAuthentificated == false}">
+                                <c:if test="${requestScope.isAuthenticated == false}">
                                         <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
                                 </c:if>
                                 <li><a href="${pageContext.request.contextPath}/users">Users</a></li>
@@ -71,7 +71,7 @@
                     <nav>
                         <ul class="nav navbar-nav navbar-right">
                             <c:choose>
-                                <c:when test="${requestScope.isAuthentificated == true}">
+                                <c:when test="${requestScope.isAuthenticated == true}">
                                     <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                                 </c:when>
                                 <c:otherwise>

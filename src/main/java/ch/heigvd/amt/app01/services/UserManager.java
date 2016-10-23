@@ -14,6 +14,13 @@ import java.util.ArrayList;
 
 // TODO: 13.10.16 Factoriser tout ça un minimum
 
+/**
+ * Implementation of the UserManager interface.
+ *
+ * Can be used as a stateless managed service.
+ *
+ * @author Damien Rochat <damien.rochat@heig-vd.ch> & Sébastien Richoz <sebastien.richoz1@heig-vd.ch>
+ */
 @Stateless
 public class UserManager implements UserManagerLocal {
 

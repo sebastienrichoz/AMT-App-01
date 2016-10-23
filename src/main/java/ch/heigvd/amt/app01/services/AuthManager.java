@@ -9,6 +9,13 @@ import javax.servlet.http.HttpSession;
 
 // TODO: 18.10.16 Etre indépendant de HttpServletRequest
 
+/**
+ * Implementation of the AuthManager interface.
+ *
+ * Can be used as a stateless managed service.
+ *
+ * @author Damien Rochat <damien.rochat@heig-vd.ch> & Sébastien Richoz <sebastien.richoz1@heig-vd.ch>
+ */
 @Stateless
 public class AuthManager implements AuthManagerLocal {
 
@@ -17,6 +24,7 @@ public class AuthManager implements AuthManagerLocal {
 
     private static final String SESSION_ATTR_USERNAME = "authUsername";
 
+    @Override
     public boolean authentificate(HttpServletRequest request, String username, String password) {
         User user = userManager.findByUsernameAndPassword(username, password);
         if (user != null) {
@@ -27,16 +35,19 @@ public class AuthManager implements AuthManagerLocal {
         return false;
     }
 
+    @Override
     public boolean isAuthentificated(HttpServletRequest request) {
         HttpSession session = request.getSession();
         return userManager.findByUsername((String) session.getAttribute(SESSION_ATTR_USERNAME)) != null;
     }
 
+    @Override
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute(SESSION_ATTR_USERNAME);
     }
 
+    @Override
     public User getUser(HttpServletRequest request) {
         if (!isAuthentificated(request)) {
             throw new RuntimeException("No logged user"); // TODO: 12.10.16
