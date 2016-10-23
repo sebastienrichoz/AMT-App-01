@@ -32,6 +32,6 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin");
+        response.sendRedirect(request.getContextPath() + "/users");
     }
 }

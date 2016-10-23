@@ -35,9 +35,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordCtrl = request.getParameter("passwordCtrl");
 
-        // TODO: 12.10.16 VerificationService ?
-
-        if (username.isEmpty() || password.isEmpty()) {
+        if (username != null && password != null && (username.isEmpty() || password.isEmpty())) {
             request.setAttribute("errorMessage", "Provide at least an username and a password");
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;

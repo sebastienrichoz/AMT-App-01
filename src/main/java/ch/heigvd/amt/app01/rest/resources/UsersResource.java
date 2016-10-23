@@ -65,8 +65,6 @@ public class UsersResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postUser(UserCreationDTO userDTO) {
 
-        // TODO: 12.10.16 VerificationService ?
-
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).entity(new ApiErrorDTO("Provide at least an username and a password")).build(); // HTTP 400 BAD REQUEST
         }
@@ -99,8 +97,6 @@ public class UsersResource {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build(); // HTTP 404 NOT FOUND
         }
-
-        // TODO: 12.10.16 VerificationService ?
 
         if (userDTO.getUsername().isEmpty() || userDTO.getPassword().isEmpty()) {
             return Response.status(422).entity(new ApiErrorDTO("Provide at least an username and a password")).build(); // HTTP 422 UNPROCESSABLE ENTITY (validation error)

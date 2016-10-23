@@ -14,7 +14,7 @@ import java.util.List;
 @WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
-    private static List<String> UNAUTHENTIFICATED_BLACKLIST = Arrays.asList("/admin");
+    private static List<String> UNAUTHENTIFICATED_BLACKLIST = Arrays.asList("/users");
     private static List<String> AUTHENTIFICATED_BLACKLIST = Arrays.asList("/login", "/register");
 
     @EJB
@@ -35,7 +35,7 @@ public class AuthFilter implements Filter {
             return;
         }
         else if (isAuthentificated && AUTHENTIFICATED_BLACKLIST.contains(path)) {
-            response.sendRedirect(request.getContextPath() + "/admin");
+            response.sendRedirect(request.getContextPath() + "/users");
             return;
         }
 
