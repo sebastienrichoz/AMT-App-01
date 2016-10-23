@@ -29,12 +29,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Get parameters and try to log in the user
+        // Get the authentication information
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (!authManager.authentificate(request, username, password)) { // todo : authenticate with the entity
 
-            // Redirect to the login page if the authentication failed
+        // Redirect to the login page if the authentication failed
+        if (!authManager.authentificate(request, username, password)) {
             request.setAttribute("errorMessage", "Username or password incorrect");
             request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
             return;

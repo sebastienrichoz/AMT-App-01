@@ -53,5 +53,12 @@ public interface UserManagerLocal {
      */
     User findByUsername(String username);
 
-    User findByUsernameAndPassword(String username, String password); // TODO: 23.10.16 remove me
+    /**
+     * Find an user by his username and his password
+     *
+     * @param username the username of the user to find.
+     * @param password the password of the user to find.
+     * @return the user entity or null of there was no result.
+     */
+    User findByUsernameAndPassword(String username, String password);
 }
