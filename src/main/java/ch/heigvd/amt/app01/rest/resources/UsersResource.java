@@ -15,8 +15,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// TODO: 13.10.16 Faire plus de tests sur Postman
-
 /**
  * Class defining all the Rest endpoints for the user resource under the (/api)/users prefix.
  *

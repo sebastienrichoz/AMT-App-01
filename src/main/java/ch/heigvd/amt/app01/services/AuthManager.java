@@ -7,8 +7,6 @@ import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-// TODO: 18.10.16 Etre indépendant de HttpServletRequest
-
 /**
  * Implementation of the AuthManager interface.
  *
@@ -50,7 +48,7 @@ public class AuthManager implements AuthManagerLocal {
     @Override
     public User getUser(HttpServletRequest request) {
         if (!isAuthentificated(request)) {
-            throw new RuntimeException("No logged user"); // TODO: 12.10.16
+            throw new RuntimeException("No logged user");
         }
         HttpSession session = request.getSession();
         return userManager.findByUsername((String) session.getAttribute(SESSION_ATTR_USERNAME));

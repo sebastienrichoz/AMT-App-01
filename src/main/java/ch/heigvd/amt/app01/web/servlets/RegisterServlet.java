@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordCtrl = request.getParameter("passwordCtrl");
 
-        // The username and the password must be filed
+        // The the username and the password must be filed
         if (username != null && password != null && (username.isEmpty() || password.isEmpty())) {
             request.setAttribute("errorMessage", "Provide at least an username and a password");
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);

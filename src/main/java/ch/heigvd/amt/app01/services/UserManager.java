@@ -29,131 +29,203 @@ public class UserManager implements UserManagerLocal {
 
     @Override
     public void save(User user) {
+        int res;
+
         if (user.getId() == 0) {
+            String query =
+                    "INSERT INTO users (firstname, lastname, email, username, password) " +
+                    "VALUES (?, ?, ?, ?, ?);";
 
-            try (Connection connection = dataSource.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstname, lastname, email, username, password) VALUES (?, ?, ?, ?, ?)");
-                statement.setString(1, user.getFirstname());
-                statement.setString(2, user.getLastname());
-                statement.setString(3, user.getEmail());
-                statement.setString(4, user.getUsername());
-                statement.setString(5, user.getPassword());
-                int r = statement.executeUpdate();
-                // TODO: 13.10.16 checker affectedRows
-                user.setId(findByUsername(user.getUsername()).getId());
+            // Execute query
+            try (
+                    Connection connection = dataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(query);
+            ) {
+                stmt.setString(1, user.getFirstname());
+                stmt.setString(2, user.getLastname());
+                stmt.setString(3, user.getEmail());
+                stmt.setString(4, user.getUsername());
+                stmt.setString(5, user.getPassword());
+                res = stmt.executeUpdate();
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException("Unable to create the user");
             }
-        }
 
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET firstname = ?, lastname = ?, email = ?, username = ?, password = ? WHERE id = ?");
-            statement.setString(1, user.getFirstname());
-            statement.setString(2, user.getLastname());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getUsername());
-            statement.setString(5, user.getPassword());
-            statement.setLong(6, user.getId());
-            int r = statement.executeUpdate();
-            // TODO: 13.10.16 checker affectedRows
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Check the query result
+            if (res != 1) {
+                throw new RuntimeException("Unable to create the user");
+            }
+
+            // Update the user with his fresh ID
+            user.setId(findByUsername(user.getUsername()).getId());
+        }
+        else {
+            String query =
+                    "UPDATE users " +
+                    "SET firstname = ?, lastname = ?, email = ?, username = ?, password = ? " +
+                    "WHERE id = ?;";
+
+            // Execute query
+            try (
+                    Connection connection = dataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(query);
+            ) {
+                stmt.setString(1, user.getFirstname());
+                stmt.setString(2, user.getLastname());
+                stmt.setString(3, user.getEmail());
+                stmt.setString(4, user.getUsername());
+                stmt.setString(5, user.getPassword());
+                stmt.setLong(6, user.getId());
+                res = stmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException("Unable to update the user");
+            }
+
+            // Check the query result
+            if (res != 1) {
+                throw new RuntimeException("Unable to update the user");
+            }
         }
     }
 
     @Override
     public void delete(User user) {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setLong(1, user.getId());
-            int r = statement.executeUpdate();
-            // TODO: 13.10.16 checker affectedRows
+        String query =
+                "DELETE FROM users " +
+                "WHERE id = ?;";
+        int res;
+
+        // Execute query
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(query);
+        ) {
+            stmt.setLong(1, user.getId());
+            res = stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to delete the user");
+        }
+
+        // Check the query result
+        if (res != 1) {
+            throw new RuntimeException("Unable to delete the user");
         }
     }
 
     @Override
     public List<User> findAll() {
+        String query =
+                "SELECT id, firstname, lastname, email, username " +
+                "FROM users;";
+        ResultSet res;
         List<User> users = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT id, firstname, lastname, email, username FROM users");
-            ResultSet r = statement.executeQuery();
-            while (r.next()) {
+
+        // Execute query
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(query);
+        ) {
+            res = stmt.executeQuery();
+            while (res.next()) {
                 users.add(new User(
-                        r.getInt("id"),
-                        r.getString("firstname"),
-                        r.getString("lastname"),
-                        r.getString("email"),
-                        r.getString("username")
+                        res.getInt("id"),
+                        res.getString("firstname"),
+                        res.getString("lastname"),
+                        res.getString("email"),
+                        res.getString("username")
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to find users");
         }
         return users;
     }
 
     @Override
     public User findById(long id) {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT id, firstname, lastname, email, username FROM users WHERE id = ?");
-            statement.setLong(1, id);
-            ResultSet r = statement.executeQuery();
-            if (r.next()) {
+        String query =
+                "SELECT id, firstname, lastname, email, username " +
+                "FROM users " +
+                "WHERE id = ?;";
+
+        // Execute query
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(query);
+        ) {
+            stmt.setLong(1, id);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
                 return new User(
-                        r.getInt("id"),
-                        r.getString("firstname"),
-                        r.getString("lastname"),
-                        r.getString("email"),
-                        r.getString("username")
+                        res.getInt("id"),
+                        res.getString("firstname"),
+                        res.getString("lastname"),
+                        res.getString("email"),
+                        res.getString("username")
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to find user");
         }
         return null;
     }
 
     @Override
     public User findByUsername(String username) {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT id, firstname, lastname, email, username FROM users WHERE username = ?");
-            statement.setString(1, username);
-            ResultSet r = statement.executeQuery();
-            if (r.next()) {
+        String query =
+                "SELECT id, firstname, lastname, email, username " +
+                "FROM users " +
+                "WHERE username = ?;";
+
+        // Execute query
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(query);
+        ) {
+            stmt.setString(1, username);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
                 return new User(
-                        r.getInt("id"),
-                        r.getString("firstname"),
-                        r.getString("lastname"),
-                        r.getString("email"),
-                        r.getString("username")
+                        res.getInt("id"),
+                        res.getString("firstname"),
+                        res.getString("lastname"),
+                        res.getString("email"),
+                        res.getString("username")
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to find user");
         }
         return null;
     }
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT id, firstname, lastname, email, username FROM users WHERE username = ? AND password = ?");
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet r = statement.executeQuery();
-            if (r.next()) {
+        String query =
+                "SELECT id, firstname, lastname, email, username " +
+                        "FROM users " +
+                        "WHERE username = ? " +
+                        "AND password = ?;";
+
+        // Execute query
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(query);
+        ) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
                 return new User(
-                        r.getInt("id"),
-                        r.getString("firstname"),
-                        r.getString("lastname"),
-                        r.getString("email"),
-                        r.getString("username")
+                        res.getInt("id"),
+                        res.getString("firstname"),
+                        res.getString("lastname"),
+                        res.getString("email"),
+                        res.getString("username")
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to find user");
         }
         return null;
     }

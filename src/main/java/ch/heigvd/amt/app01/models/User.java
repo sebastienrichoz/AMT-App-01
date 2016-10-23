@@ -10,7 +10,7 @@ public class User {
     private long id;
     private String firstname;
     private String lastname;
-    private String email; // TODO: 18.10.16 Unique
+    private String email;
     private String username;
     private String password;
 
