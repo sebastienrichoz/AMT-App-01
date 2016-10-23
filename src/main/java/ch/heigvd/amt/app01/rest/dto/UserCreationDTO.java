@@ -15,6 +15,9 @@ public class UserCreationDTO {
     private String password;
     private String passwordCtrl;
 
+    /**
+     * Empty default constructor
+     */
     public UserCreationDTO() {}
 
     /**

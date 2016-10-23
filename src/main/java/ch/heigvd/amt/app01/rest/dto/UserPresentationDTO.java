@@ -16,6 +16,9 @@ public class UserPresentationDTO {
     private String email;
     private String username;
 
+    /**
+     * Empty default constructor
+     */
     public UserPresentationDTO() {}
 
     /**

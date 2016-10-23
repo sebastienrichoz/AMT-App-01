@@ -10,10 +10,14 @@ package ch.heigvd.amt.app01.rest.dto;
  * @author Damien Rochat <damien.rochat@heig-vd.ch> & Sébastien Richoz <sebastien.richoz1@heig-vd.ch>
  */
 public class ApiErrorDTO {
-    // TODO: 18.10.16 ajouter un type d'erreur, un code d'erreur
 
     private String message;
 
+    /**
+     * Constructor of the Error.
+     *
+     * @param message the message describing the error.
+     */
     public ApiErrorDTO(String message) {
         this.message = message;
     }
