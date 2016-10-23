@@ -1,4 +1,4 @@
-# Test of the Rest API with Postman
+# Testing the Rest API with Postman
 
 You would find in the test folder a file `postman-collection.json` containing a collection (v2) of HTTP request to show the API in action.
 
