@@ -1,4 +1,4 @@
-# Postman collection
+# Test of the Rest API with Postman
 
 You would find in the test folder a file `postman-collection.json` containing a collection (v2) of HTTP request to show the API in action.
 
@@ -20,4 +20,4 @@ We add some assertions to test the content and the status code of the requests. 
 
 The tests are not optimal, so to make sur the results are correct, run the tests on a fresh install of the app. We didn't found how to make conditional tests in Postman.
 
-[More about Postman](https://www.getpostman.com/docs/) .
+[More about Postman](https://www.getpostman.com/docs/).

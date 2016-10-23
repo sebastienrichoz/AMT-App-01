@@ -27,7 +27,9 @@ After you've got launched the application with docker-compose, you can access :
 - Wildfly administration on the port `9990`
 
 ## Rest API
-The API allowing users management is documented here. It provide endpoints to create, find, update and delete users. You can also find a Postman collection to test see the API in action.
+The API allowing users management is documented. Check the [API file](https://github.com/sebastienrichoz/AMT-App-01/blob/master/doc/API.md). It provide endpoints to create, find, update and delete users. You can also find a Postman collection to test see the API in action.
+
+You can learn how to test the Rest API with [this documentation](https://github.com/sebastienrichoz/AMT-App-01/blob/master/doc/Postman.md).
 
 This API is not secured with an authentication.
 
