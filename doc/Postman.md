@@ -8,7 +8,7 @@ You need to have Postman installed. If not, follow [this link](https://www.getpo
 
 You can import the script or use the button bellow.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3e1c0989246d0cb14a05)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/91cdf75ba7aeeed3b035)
 
 You also need to set a new environment in Postman with the environment variable **SERVER_URL** corresponding to your installation : `127.0.0.1:8080` or `192.168.99.100:8080`.
 
